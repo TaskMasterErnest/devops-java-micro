@@ -18,8 +18,3 @@ pipeline {
         }
     }
 }
-post {
-    success {
-        echo " MY JENKINS PIPELINE WAS SUCCESSFUL "
-    }
-}
