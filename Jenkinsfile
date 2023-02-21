@@ -1,19 +1,19 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven'
+        mvn 'Maven'
     }
     stages {
         stage ("test") {
             steps {
                 echo "testing the application ..."
-                sh 'maven test'
+                sh 'mvn test'
             }
         }
         stage ("build") {
             steps {
                 echo "building the application ..."
-                sh 'maven package'
+                sh 'mvn package'
             }
         }
         stage ("deploy") {
