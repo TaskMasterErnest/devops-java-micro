@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        mnv 'Maven'
+        mvn 'Maven'
     }
     stages {
         stage ("test") {
