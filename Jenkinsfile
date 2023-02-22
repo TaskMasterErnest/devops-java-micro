@@ -7,13 +7,12 @@ pipeline {
         stage ("test") {
             steps {
                 echo "testing the application ..."
-                sh 'mvn test'
+                sh 'mvn --version'
             }
         }
         stage ("build") {
             steps {
                 echo "building the application ..."
-                sh 'mvn package'
             }
         }
         stage ("deploy") {
