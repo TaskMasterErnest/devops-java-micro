@@ -13,11 +13,11 @@ pipeline {
         stage ("build") {
             steps {
                 echo "building the application ..."
-                sh "docker build -t ernestklu/java-maven-app:v2 ."
+                sh "docker build -t ernestklu/java-maven-app:v3 ."
                 withCredentials([
                     usernamePassword(credentials: docker-creds, usernameVariable: 'USER', passwordVariable: 'PASS' )]) {
                         sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh "docker push ernestklu/java-maven-app:v2"
+                        sh "docker push ernestklu/java-maven-app:v3"
                     }
             }
         }
