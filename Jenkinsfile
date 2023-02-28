@@ -10,7 +10,12 @@ pipeline {
         stage ("build") {
             steps {
                 echo "building the application ..."
-                echo "trying to get this to work ... "
+                withCredentials([
+                    usernamePassword(credentials: docker-creds, usernameVariable: 'USER', passwordVariable: 'PASS']) {
+                        sh "docker build -t ernestklu/java-maven-app:v2 ."
+                        echo $PASS | docker login -u $USER --password-stdin
+                        sh "docker push ernestklu/java-maven-app:v2"
+                    }
             }
         }
         stage ("deploy") {
