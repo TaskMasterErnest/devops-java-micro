@@ -13,6 +13,7 @@ pipeline {
         stage ("build") {
             steps {
                 echo "building the application ..."
+                echo "trying to get this to work ... "
             }
         }
         stage ("deploy") {
