@@ -14,12 +14,12 @@ pipeline {
             steps {
                 echo "building the docker image..."
                 withCredentials([
-                    usernamePassword(credentialsId: 'docker-creds', 
+                    usernamePassword(credentialsId: 'docker-hub-creds', 
                     passwordVariable: 'PASS', usernameVariable: 'USER')]) 
                     {
-                    sh 'docker build -t ernestklu/java-maven-app:v3 .'
+                    sh 'docker build -t ernestklu/java-maven-app:v3.0.1 .'
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh "docker push ernestklu/java-maven-app:v3"
+                    sh "docker push ernestklu/java-maven-app:v3.0.1"
                 }
             }
         }
