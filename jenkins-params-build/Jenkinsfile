@@ -35,11 +35,11 @@ pipeline {
         stage('deploy') {
             input {
                 message "select env to deploy to"
-                ok: :'Done'
-            }
-            when {
-                expression {
-                    params.ENV
+                ok: 'Done'
+                when {
+                    expression {
+                        params.ENV
+                    }
                 }
             }
             steps {
