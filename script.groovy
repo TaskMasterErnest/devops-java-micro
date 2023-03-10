@@ -3,7 +3,7 @@ def testImage() {
     sh 'mvn test'
 }   
 
-def buildImage(string imageName) {
+def buildImage(String imageName) {
     echo "building the docker image..."
     withCredentials([
         usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
