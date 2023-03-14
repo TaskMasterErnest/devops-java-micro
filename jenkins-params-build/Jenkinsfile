@@ -32,14 +32,14 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                input {
-                    message "Select environment to deploy to"
-                    ok "Done"
-                    parameters {
-                        choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
+                scripts {
+                    input {
+                        message "Select environment to deploy to"
+                        ok "Done"
+                        parameters {
+                            choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
+                        }
                     }
-                }
-                script {
                     gv.deployImage()
                 }
             }
