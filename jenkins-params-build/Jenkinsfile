@@ -8,7 +8,6 @@ pipeline {
     }
     parameters {
         booleanParam(name: 'executeTests', defaultValue: true, description: "should execute tests")
-        choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
     }
     stages {
         stage('init') {
@@ -40,10 +39,8 @@ pipeline {
                         choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
                     }
                 }
-                steps {
-                    script {
-                        gv.deployImage()
-                    }
+                script {
+                    gv.deployImage()
                 }
             }
         }
