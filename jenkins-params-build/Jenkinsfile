@@ -8,6 +8,7 @@ pipeline {
     }
     parameters {
         booleanParam(name: 'executeTests', defaultValue: true, description: "should execute tests")
+        choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
     }
     stages {
         stage('init') {
@@ -32,12 +33,17 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                script {
-                    env.ENV = input message: "select which environment you wish to deploy to", ok "Done"
-                    parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')]
-
-                    gv.deployImage()
-                    echo "Deploying to ${ENV}"
+                input {
+                    message "Select environment to deploy to"
+                    ok "Done"
+                    parameters {
+                        choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')
+                    }
+                }
+                steps {
+                    script {
+                        gv.deployImage()
+                    }
                 }
             }
         }
