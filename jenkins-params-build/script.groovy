@@ -3,4 +3,8 @@ def testImage() {
     sh 'mvn test'
 }   
 
+def deployImage() {
+    echo "deploying build..."
+}
+
 return this
