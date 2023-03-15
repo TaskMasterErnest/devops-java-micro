@@ -24,7 +24,7 @@ pipeline {
                     if (params.PICK == 'No') {
                         echo "Did not choose Yes, so what do we do now?"
                     } else {
-                        gv.testImage()
+                        sh "mvn test"
                     }
                 }
             }
