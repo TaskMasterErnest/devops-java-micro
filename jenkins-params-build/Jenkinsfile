@@ -33,7 +33,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    input message 'select environment to deploy to:', parameters [choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'selecting env to deploy to')]
+                    input message 'select environment to deploy to:' parameters [choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: 'selecting env to deploy to')]
                     
                     echo "Deploying to ${params.ENV}"
                     gv.deployImage()
