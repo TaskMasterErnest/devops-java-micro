@@ -22,9 +22,9 @@ pipeline {
                     parameters: [choice(name: "CHOOSE", choices: ['Yes', 'No'], description: '')]
 
                     when {
-                        expression { params.CHOOSE == 'Yes'}
+                        expression { params.CHOOSE == 'Yes' }
+                        gv.testImage()
                     }
-                    gv.testImage()
                 }
                 echo "Let this run.."
             }
