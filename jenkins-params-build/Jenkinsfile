@@ -29,10 +29,11 @@ pipeline {
                     env.PICK = input message: "Select whether to test or not", ok: "Done",
                     parameters: [choice(name: "PICK", choices: ['Yes', 'No'], description: '')]
                     
-                    if (params.PICK != 'Yes') {
+                    if (params.PICK == 'No') {
                         echo "Did not choose Yes, so what do we do now?"
+                    } else {
+                        gv.testImage()
                     }
-                    gv.testImage()
                     }
                 }
             }
