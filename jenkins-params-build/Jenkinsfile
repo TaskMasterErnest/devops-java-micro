@@ -19,11 +19,6 @@ pipeline {
             }
         }
         stage('test') {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
             steps {
                 script {
                     env.PICK = input message: "Select whether to test or not", ok: "Done",
