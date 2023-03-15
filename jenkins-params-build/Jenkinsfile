@@ -6,9 +6,6 @@ pipeline {
     tools {
         maven 'Maven'
     }
-    parameters {
-        booleanParam(name: 'executeTests', defaultValue: true, description: "should execute tests")
-    }
     stages {
         stage('init') {
             steps {
@@ -29,9 +26,9 @@ pipeline {
                     } else {
                         gv.testImage()
                     }
-                    }
                 }
             }
+        }
         stage('deploy') {
             steps {
                 script {
