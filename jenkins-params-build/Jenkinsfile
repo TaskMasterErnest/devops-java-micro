@@ -32,7 +32,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                input (
+                input(
                     message: 'Select environment to deploy to:',
                     parameters [
                         choice(
