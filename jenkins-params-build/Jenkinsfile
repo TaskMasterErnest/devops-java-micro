@@ -24,7 +24,7 @@ pipeline {
                     when {
                         expression { params.CHOOSE == 'Yes'}
                     }
-                    gv.testImage()I
+                    gv.testImage()
                 }
                 echo "Let this run.."
             }
