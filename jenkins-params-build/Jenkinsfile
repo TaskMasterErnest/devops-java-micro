@@ -42,7 +42,9 @@ pipeline {
                         )
                     ]
                 )
-                echo 'deploying to ${params.env}'
+                steps {
+                    echo "deploying to ${params.env}"
+                }
             }
         }
     }
