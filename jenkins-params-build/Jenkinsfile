@@ -21,14 +21,19 @@ pipeline {
                     env.PICK = input message: "Select whether to test or not", ok: "Done",
                     parameters: [choice(name: "CHOOSE", choices: ['Yes', 'No'], description: '')]
                     
-                    if (params.PICK == 'No') {
-                        echo "Did not choose Yes, so what do we do now?"
-                    }
-                    if (params.PICK == 'Yes'){
+                    when {
+                        expression {
+                            params.CHOOSE == 'Yes'
+                        }
                         gv.testImage()
+
+                        expression {
+                            params.CHOOSE == 'No'
+                        }
+                        echo "I chose No, so this ran"
                     }
                 }
-                echo "Maven has not tested, I chose Yes too"
+                echo "Runs regardless of what happens in test stage"
             }
         }
         stage('deploy') {
