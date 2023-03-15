@@ -23,6 +23,8 @@ pipeline {
 
                     when {
                         expression { params.CHOOSE == 'Yes' }
+                        }
+                    steps {
                         gv.testImage()
                     }
                 }
