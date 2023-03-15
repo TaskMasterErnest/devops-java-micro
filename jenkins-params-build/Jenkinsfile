@@ -28,6 +28,7 @@ pipeline {
                         gv.testImage()
                     }
                 }
+                sh 'echo "Maven has not tested, I chose Yes too"'
             }
         }
         stage('deploy') {
