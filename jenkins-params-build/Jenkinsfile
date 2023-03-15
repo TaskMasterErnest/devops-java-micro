@@ -26,7 +26,15 @@ pipeline {
             }
             steps {
                 script {
-                    gv.testImage()
+                    env.ENV = input message: "Select whether to test or not", ok: "Done",
+                    parameters: [choice(name: "PICK", choices: ['Yes', 'No'], description: '')]
+                    when {
+                        expression {
+                            params.'PICK' == 'Yes'
+                        }
+                        gv.testImage()
+                    }
+                    echo "Did not choose Yes, so what do we do now?"
                 }
             }
         }
