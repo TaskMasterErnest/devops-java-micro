@@ -20,20 +20,13 @@ pipeline {
                 script {
                     env.PICK = input message: "Select whether to test or not", ok: "Done",
                     parameters: [choice(name: "CHOOSE", choices: ['Yes', 'No'], description: '')]
-                    
-                    when {
-                        expression {
-                            params.CHOOSE == 'Yes'
-                        }
-                        gv.testImage()
 
-                        expression {
-                            params.CHOOSE == 'No'
-                        }
-                        echo "I chose No, so this ran"
+                    when {
+                        expression { params.CHOOSE == 'Yes'}
                     }
+                    gv.testImage()I
                 }
-                echo "Runs regardless of what happens in test stage"
+                echo "Let this run.."
             }
         }
         stage('deploy') {
