@@ -32,11 +32,10 @@ pipeline {
                     if (params.PICK != 'Yes') {
                         echo "Did not choose Yes, so what do we do now?"
                     }
-                    }
                     gv.testImage()
+                    }
                 }
             }
-        
         stage('deploy') {
             steps {
                 script {
