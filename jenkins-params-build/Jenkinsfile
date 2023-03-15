@@ -36,7 +36,7 @@ pipeline {
                     echo "Did not choose Yes, so what do we do now?"
                 }
             }
-        }
+        
         stage('deploy') {
             steps {
                 script {
