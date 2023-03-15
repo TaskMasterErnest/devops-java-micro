@@ -34,8 +34,8 @@ pipeline {
             steps {
                 script {
                     input {
-                        message: 'select environment to deploy to:',
-                        ok: 'Done'
+                        message 'select environment to deploy to:'
+                        ok 'Done'
                         parameters [
                             choice(
                                 name: 'ENV',
