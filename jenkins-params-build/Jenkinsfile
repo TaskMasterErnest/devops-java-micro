@@ -32,16 +32,16 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                input(
-                    message: 'Select environment to deploy to:',
+                input(message: 'Select environment to deploy to:',
                     ok: 'Done',
                     parameters [
-                        choice(
+                         choice(
                             name: 'env',
                             choices: ['dev', 'test', 'prod'],
                             description: 'Environment to deploy to'
                         )
                     ]
+                        
                 )
                 echo "deploying to ${params.env}"
                 script {
