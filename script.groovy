@@ -3,3 +3,5 @@
 def buildJar() {
     echo "building the jar application ..."
 }
+
+return this
