@@ -5,7 +5,6 @@ def gv
 
 pipeline {
     agent any 
-    
     stages {
         stage('init') {
             steps {
