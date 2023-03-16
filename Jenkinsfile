@@ -6,17 +6,19 @@ def gv
 pipeline {
     agent any 
     
-    stage('init') {
-        steps {
-            script {
-                gv = load "script.groovy"
+    stages {
+        stage('init') {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
             }
         }
-    }
-    stage('test Library') {
-        steps {
-            script {
-                testCode()
+        stage('test Library') {
+            steps {
+                script {
+                    testCode()
+                }
             }
         }
     }
