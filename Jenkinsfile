@@ -22,7 +22,7 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    buildImage "ernestklu/java-maven-app:3.2.0"
+                    gv.dockerImage()
                 }
             }
         }
