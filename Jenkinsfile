@@ -11,14 +11,20 @@ pipeline {
                 }
 			}
 		}
-		stage('test & build') {
+		stage('testing') {
 			steps {
 				script {
 					gv.buildJar()
                     testJar()
-                    buildImage 'ernestklu/java-maven-app:4.0.0'
 				}
 			}
 		}
+        stage('build') {
+            steps {
+                script {
+                    buildImage "ernestklu/java-maven-app:4.0.0"
+                }
+            }
+        }
     }
 }
