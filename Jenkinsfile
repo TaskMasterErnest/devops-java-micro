@@ -1,0 +1,23 @@
+#!/user/bin/env groovy
+@Library('jenkins-shared-library')
+
+def gv
+
+pipeline {
+    agent any 
+    
+    stage('init') {
+        steps {
+            script {
+                gv = load "script.groovy"
+            }
+        }
+    }
+    stage('test Library') {
+        steps {
+            script {
+                testCode()
+            }
+        }
+    }
+}
