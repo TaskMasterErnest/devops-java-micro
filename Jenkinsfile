@@ -22,9 +22,16 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    gv.dockerImage()
+                    buildImage 'ernestklu/java-maven-app:v4.1.1'
                 }
             }
         }
+		stage('push') {
+			steps {
+				script {
+					dockerPush 'ernestklu/java-maven-app:v4.1.1'
+				}
+			}
+		}
     }
 }
