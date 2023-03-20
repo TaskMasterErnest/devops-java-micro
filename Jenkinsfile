@@ -25,7 +25,7 @@ pipeline {
 		stage('build docker image') {
 			steps {
 				script {
-					dockerImageBuild 'ernestklu/java-maven-app:v3.3.0'
+					dockerImageBuild "ernestklu/java-maven-app:v3.3.0"
 				}
 			}
 		}
@@ -39,7 +39,7 @@ pipeline {
 		stage('Push Image') {
 			steps {
 				script {
-					dockerPush 'ernestklu/java-maven-app:v3.3.0'
+					dockerPush "ernestklu/java-maven-app:v3.3.0"
 				}
 			}
 		}
