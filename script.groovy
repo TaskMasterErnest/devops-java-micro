@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 def testImage() {
-    sh "mvn test"
+    sh "mvn clean package"
 }
 
 return this
