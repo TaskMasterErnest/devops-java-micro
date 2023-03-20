@@ -1,37 +1,43 @@
 #!/usr/bin/env groovy
-@Library('jenkins-shared-library')
-def gv
+@Library('jenkins-shared-library')_
+
 pipeline {
 	agent any
 	stages {
 		stage('init') {
 			steps {
-                script {
-                    gv = load "script.groovy"
-                }
-			}
-		}
-		stage('testing') {
-			steps {
 				script {
-					gv.buildJar()
-                    testJar()
+					gv = load "script.groovy"
 				}
 			}
 		}
-        stage('build') {
-            steps {
-                script {
-                    buildImage 'ernestklu/java-maven-app:v4.1.1'
-                }
-            }
-        }
-		stage('push') {
+		stage('test') {
 			steps {
 				script {
-					dockerPush 'ernestklu/java-maven-app:v4.1.1'
+					gv.testImage()
 				}
 			}
 		}
-    }
+		stage('build docker image') {
+			steps {
+				script {
+					dockerImageBuild 'ernestklu/java-maven-app:v3.3.0'
+				}
+			}
+		}
+		stage('Login to Docker') {
+			steps {
+				script {
+					dockerLogin()
+				}
+			}
+		}
+		stage('Push Image') {
+			steps {
+				script {
+					dockerPush 'ernestklu/java-maven-app:v3.3.0'
+				}
+			}
+		}
+	}
 }
