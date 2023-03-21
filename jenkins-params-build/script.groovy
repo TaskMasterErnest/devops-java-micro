@@ -5,7 +5,7 @@ def testImage() {
 
 def deployImage() {
     echo "deploying build..."
-    echo "This is the webhook branch ..."
+    echo "This is the webhook branch .."
 }
 
 return this
