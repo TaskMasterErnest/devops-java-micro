@@ -17,8 +17,8 @@ pipeline {
                     sh "mvn build-helper:parse-version versions:set \
                         -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                         versions:commit"
-                    def pom = new XmlSlurper().parseText(readFile('pom.xml'))
-                    def version = pom.version.text()
+                    def pom = readMavenPom file: 'pom.xml'
+                    def version = pom.version
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
