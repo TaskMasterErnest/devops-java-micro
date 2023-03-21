@@ -18,7 +18,7 @@ pipeline {
                         -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                         versions:commit"
                     def pomContent = readFile('pom.xml')
-                    def versionPattern = /<version>(.*?)<\/version>/
+                    def versionPattern = /<version>(.*?)<version>/
                     def versionMatcher = versionPattern.matcher(pomContent)
                     if (versionMatcher.find()) {
                         def version = versionMatcher.group(1)
