@@ -26,7 +26,7 @@ pipeline {
 		stage('build docker image') {
 			steps {
 				script {
-					dockerImageBuild "ernestklu/java-maven-app:v3.3.0"
+					dockerBuildImage "ernestklu/java-maven-app:v3.3.0"
 				}
 			}
 		}
