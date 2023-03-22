@@ -1,5 +1,5 @@
 def testImage() {
-    echo "testing the app ...."
+    echo "testing the app .."
     sh "mvn clean package" 
 }   
 
