@@ -10,7 +10,7 @@ def buildImage() {
 
 def deployImage() {
     echo "deploying build..."
-    echo "This is the latest webhook branch .."
+    echo "This is the finest webhook branch .."
 }
 
 return this
