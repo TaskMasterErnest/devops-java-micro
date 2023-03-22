@@ -17,8 +17,8 @@ pipeline {
                     sh "mvn build-helper:parse-version versions:set \
                         -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.nextMinorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                         versions:commit"
-                    def pom = readMavenPom file: 'pom.xml'
-                    def version = pom.version
+                    def pom = new XmlSlurper().parseText(readFile('pom.xml'))
+                    def version = pom.version.text()
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
@@ -56,6 +56,25 @@ pipeline {
                     env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')]                    
                     gv.deployImage()
                     echo "Deploying to ${ENV}"
+                }
+            }
+        }
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'github-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                        sh 'git config user.email "jenkins@example.com"'
+						sh 'git config user.name "jenkins"'
+
+						sh 'git status'
+						sh 'git branch'
+						sh 'git config --list'
+
+                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/TaskMasterErnest/java-maven-app"
+                        sh 'git add .'
+                        sh 'git commit -m "incremented the version and committed it back to repo"'
+                        sh 'git push origin HEAD:jenkins-ci'
+                    }
                 }
             }
         }
