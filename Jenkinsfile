@@ -26,9 +26,11 @@ pipeline {
             steps {
                 script {
                     echo "SSH-ing into the EC2 instance"
-                    def dockerCmd = "docker run -p 3080:8000 -d ernestklu/falcon-look-app:latest"
+                    def ec2IntanceIP = 'ec2-user@18.133.186.136'
+                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@18.133.186.136 ${dockerCmd}"
+                        sh "scp docker-compose.yaml ${ec2IntanceIP}:/home/ec2-user"
+                        sh "ssh -o StrictHostKeyChecking=no ${ec2IntanceIP} ${dockerComposeCmd}"
                     }
                 }
             }
