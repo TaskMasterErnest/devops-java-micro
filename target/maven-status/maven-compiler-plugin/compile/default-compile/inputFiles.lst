@@ -1,2 +1,2 @@
-/home/ernestklu/github/java/java-maven-app/src/main/java/hello/Greeter.java
-/home/ernestklu/github/java/java-maven-app/src/main/java/hello/HelloWorld.java
+/var/jenkins_home/workspace/new-test-pipeline/src/main/java/hello/HelloWorld.java
+/var/jenkins_home/workspace/new-test-pipeline/src/main/java/hello/Greeter.java

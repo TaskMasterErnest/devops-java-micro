@@ -1,65 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="hello.GreeterTest" time="0.005" errors="0" skipped="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="hello.GreeterTest" time="0.235" tests="1" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="java.vm.version" value="11.0.17+8"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-11.0.17.0.8-3.fc36.x86_64/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/ernestklu/github/java/java-maven-app"/>
-    <property name="java.vm.vendor" value="Red Hat, Inc."/>
-    <property name="java.vendor.url" value="https://www.redhat.com/"/>
-    <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="path.separator" value=":"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="sun.os.patch.level" value="unknown"/>
-    <property name="user.country" value="US"/>
-    <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/ernestklu/github/java/java-maven-app"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
-    <property name="java.runtime.version" value="11.0.17+8"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="line.separator" value="
-"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
-    <property name="maven.conf" value="/usr/share/maven/conf"/>
-    <property name="jdk.debug" value="release"/>
-    <property name="java.class.version" value="55.0"/>
-    <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="5.19.11-200.fc36.x86_64"/>
-    <property name="library.jansi.path" value="/usr/share/maven/lib/jansi-native"/>
-    <property name="user.home" value="/home/ernestklu"/>
-    <property name="user.timezone" value="Africa/Accra"/>
-    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
-    <property name="file.encoding" value="UTF-8"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.specification.version" value="11"/>
-    <property name="user.name" value="ernestklu"/>
-    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.6.0.jar"/>
-    <property name="java.vm.specification.version" value="11"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/var/jenkins_home/workspace/new-test-pipeline/target/test-classes:/var/jenkins_home/workspace/new-test-pipeline/target/classes:/root/.m2/repository/joda-time/joda-time/2.9.2/joda-time-2.9.2.jar:/root/.m2/repository/junit/junit/4.12/junit-4.12.jar:/root/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
-    <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-11.0.17.0.8-3.fc36.x86_64"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="11"/>
+    <property name="os.name" value="Linux"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/opt/java/openjdk/lib"/>
+    <property name="sun.java.command" value="/var/jenkins_home/workspace/new-test-pipeline/target/surefire/surefirebooter-20230323224141401_3.jar /var/jenkins_home/workspace/new-test-pipeline/target/surefire 2023-03-23T22-41-40_780-jvmRun1 surefire-20230323224141401_1tmp surefire_0-20230323224141401_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/var/jenkins_home/workspace/new-test-pipeline/target/test-classes:/var/jenkins_home/workspace/new-test-pipeline/target/classes:/root/.m2/repository/joda-time/joda-time/2.9.2/joda-time-2.9.2.jar:/root/.m2/repository/junit/junit/4.12/junit-4.12.jar:/root/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/root"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
-    <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.version" value="11.0.17"/>
-    <property name="java.vendor" value="Red Hat, Inc."/>
-    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="java.version.date" value="2023-01-17"/>
+    <property name="java.home" value="/opt/java/openjdk"/>
     <property name="file.separator" value="/"/>
-    <property name="java.version.date" value="2022-10-18"/>
-    <property name="java.vendor.url.bug" value="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora&amp;component=java-11-openjdk&amp;version=36"/>
+    <property name="basedir" value="/var/jenkins_home/workspace/new-test-pipeline"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/var/jenkins_home/workspace/new-test-pipeline/target/surefire/surefirebooter-20230323224141401_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="11.0.18+10"/>
+    <property name="user.name" value="root"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="5.10.173-154.642.amzn2.x86_64"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-11.0.18+10"/>
+    <property name="localRepository" value="/root/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="11.0.18"/>
+    <property name="user.dir" value="/var/jenkins_home/workspace/new-test-pipeline"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="11.0.18+10"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="sun.cpu.endian" value="little"/>
-    <property name="java.vendor.version" value="(Red_Hat-11.0.17.0.8-3.fc36)"/>
-    <property name="sun.desktop" value="gnome"/>
-    <property name="sun.cpu.isalist" value=""/>
+    <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase classname="hello.GreeterTest" name="greeterSaysHello" time="0.005"/>
+  <testcase name="greeterSaysHello" classname="hello.GreeterTest" time="0.014"/>
 </testsuite>
