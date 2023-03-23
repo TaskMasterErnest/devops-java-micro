@@ -22,16 +22,15 @@ pipeline {
                 }
             }
         }
-        stage('build & push to Docker') {
-            steps {
-                script {
-                    gv.buildImage 'ernestklu/java-maven-app:v3.0.2'
-                }
-            }
-        }
         stage('deploy') {
             steps {
-                echo "deploying the application..."
+                script {
+                    echo "SSH-ing into the EC2 instance"
+                    def dockerCmd = "docker run -p 3080:8000 -d ernestklu/falcon-look-app:latest"
+                    sshagent(['ec2-server-key']) {
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@http://ec2-18-133-186-136.eu-west-2.compute.amazonaws.com ${dockerCmd}"
+                    }
+                }
             }
         }
     }
