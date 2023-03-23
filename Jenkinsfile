@@ -49,6 +49,18 @@ pipeline {
                 }
             }
         }
+        stage('deploy') {
+            steps {
+                script {
+                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
+					def instanceIp = "ec2-user@18.170.50.124"
+					sshagent(['ec2-server-key']) {
+						sh "scp docker-compose.yaml ${instanceIp}:/home/ec2-user"
+						sh "ssh -o StrictHostKeyChecking=no ${instanceIp}:/home/ec2-user ${dockerComposeCmd}"
+                    }
+                }
+            }
+        }
         stage('commit to repo') {
             steps {
                 script {
@@ -61,18 +73,6 @@ pipeline {
                     sh 'git commit -m "ci: version bump"'
                     sh 'git push origin HEAD:jenkins-ci'
 
-                    }
-                }
-            }
-        }
-        stage('deploy') {
-            steps {
-                script {
-                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
-					def instanceIp = "ec2-user@18.170.50.124"
-					sshagent(['ec2-server-key']) {
-						sh "scp docker-compose.yaml ${instanceIp}:/home/ec2-user"
-						sh "ssh -o StrictHostKeyChecking=no ${instanceIp}:/home/ec2-user ${dockerComposeCmd}"
                     }
                 }
             }
