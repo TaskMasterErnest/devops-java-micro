@@ -1,4 +1,7 @@
 #!/usr/bin/env groovy
+
+@Library('jenkins-shared-library')_
+
 def gv
 
 pipeline {
@@ -6,31 +9,58 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    environment {
+        DOCKER_IMAGE = 'ernestklu/java-maven-app'
+    }
     stages {
+        stage('increment application version') {
+            steps {
+                script {
+                    echo "incrementing application version ..."
+                    sh 'mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit'
+                    def pom = new XmlSlurper().parseText(readFile('pom.xml'))
+                    def version = pom.version.text()
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                }
+            }
+        }
         stage('init') {
             steps {
                 script {
                     gv = load "script.groovy"
                 }
-                
             }
         }
-        stage('test') {
+        stage('packaging application ...') {
             steps {
                 script {
                     gv.testImage()
                 }
             }
         }
-        stage('deploy') {
+        stage('build and push to Docker ...') {
             steps {
                 script {
-                    echo "SSH-ing into the EC2 instance"
-                    def ec2IntanceIP = 'ec2-user@18.133.186.136'
-                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
-                    sshagent(['ec2-server-key']) {
-                        sh "scp docker-compose.yaml ${ec2IntanceIP}:/home/ec2-user"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2IntanceIP} ${dockerComposeCmd}"
+                    dockerBuildImage "${DOCKER_IMAGE}:${IMAGE_NAME}"
+                    dockerLogin()
+                    dockerPush "${DOCKER_IMAGE}:${IMAGE_NAME}"
+                }
+            }
+        }
+        stage('commit to repo') {
+            steps {
+                script {
+                    withCredentials([gitUsernamePassword(credentialsId: '6f310649-fa84-4ad2-a050-38354b76596a', gitToolName: 'Default')]) {
+                    
+                    sh 'git config user.email "jenkins@example.com"'
+                    sh 'git config user.name "jenkins"'
+
+                    sh 'git add .'
+                    sh 'git commit -m "ci: version bump"'
+                    sh 'git push origin HEAD:jenkins-ci'
+
                     }
                 }
             }
