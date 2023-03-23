@@ -28,7 +28,7 @@ pipeline {
                     echo "SSH-ing into the EC2 instance"
                     def dockerCmd = "docker run -p 3080:8000 -d ernestklu/falcon-look-app:latest"
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@http://ec2-18-133-186-136.eu-west-2.compute.amazonaws.com ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@18.133.186.136 ${dockerCmd}"
                     }
                 }
             }
