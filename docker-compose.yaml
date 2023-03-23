@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  java-maven-app:
+    image: ernestklu/falcon-look-app:latest
+    ports:
+      - 3080:8000
+  postgres:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=my-pwd
