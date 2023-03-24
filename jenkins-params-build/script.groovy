@@ -5,7 +5,7 @@ def testImage() {
 
 def buildImage() {
     echo 'building the docker image ...'
-    sh "docker build -t ernestklu/java-maven-app:${IMAGE_NAME} ."
+    sh "docker build -t ernestklu/java-maven-app:1.7.0 ."
 }
 
 def deployImage() {
