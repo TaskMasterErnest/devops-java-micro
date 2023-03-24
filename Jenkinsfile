@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-        stage('packaging application ...') {
+        stage('packaging application ..') {
             steps {
                 script {
                     gv.testImage()
