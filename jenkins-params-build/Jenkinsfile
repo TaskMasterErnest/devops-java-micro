@@ -81,7 +81,7 @@ pipeline {
             steps {
                 script {
                     def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
-                    def instanceIp = "ec2-user@13.42.46.45"
+                    def instanceIp = "ec2-user@ec2-13-42-46-45.eu-west-2.compute.amazonaws.com"
                     sshagent(['ec2-server-key']) {
                         sh "scp docker-compose.yaml ${instanceIp}:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ${instanceIp}:/home/ec2-user ${dockerComposeCmd}"
