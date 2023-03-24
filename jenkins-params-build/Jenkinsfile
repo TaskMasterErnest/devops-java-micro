@@ -77,19 +77,16 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to EC2') {
-            agent none
-            environment {
-                SSH_KEY = credentials('my-ssh-key')
-                REMOTE_USER = 'ec2-user'
-                REMOTE_HOST = 'ec2-13-42-46-45.eu-west-2.compute.amazonaws.com'
-                REMOTE_DIR = '/home/ec2-user'
-            }
+        stage('deploy an application on EC2 instance') {
             steps {
-                sshagent(['my-ssh-key']) {
-                sh "ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST}"
-                sh "scp -o StrictHostKeyChecking=no docker-compose.yml ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}/"
-                sh 'docker-compose -f docker-compose.yaml up'
+                script {
+                    def REMOTE_INSTANCE = 'ec2-user@ec2-13-42-46-45.eu-west-2.compute.amazonaws.com'
+                    def REMOTE_DIR = '/home/ec2-user'
+                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
+                    sshagent(['ec2-server-key']) {
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${REMOTE_INSTANCE}:${REMOTE_DIR}/"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_INSTANCE} ${dockerComposeCmd}"
+                    }
                 }
             }
         }
