@@ -1,6 +1,6 @@
 def testImage() {
     echo "testing the app ..."
-    sh "mvn package" 
+    sh "mvn clean package" 
 }   
 
 def buildImage() {
