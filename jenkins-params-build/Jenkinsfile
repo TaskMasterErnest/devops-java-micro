@@ -80,7 +80,7 @@ pipeline {
         stage('deploy an application on EC2 instance') {
             steps {
                 script {
-                    def REMOTE_INSTANCE = 'ec2-user@ec2-13-42-46-45.eu-west-2.compute.amazonaws.com'
+                    def REMOTE_INSTANCE = 'ec2-user@13.42.103.88'
                     def REMOTE_DIR = '/home/ec2-user'
                     def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
                     sshagent(['ec2-server-key']) {
