@@ -82,7 +82,7 @@ pipeline {
                 script {
                     def REMOTE_INSTANCE = 'ec2-user@13.42.103.88'
                     def REMOTE_DIR = '/home/ec2-user'
-                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up'
+                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up --detach'
                     sshagent(['ec2-server-key']) {
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${REMOTE_INSTANCE}:${REMOTE_DIR}/"
                         sh "ssh -o StrictHostKeyChecking=no ${REMOTE_INSTANCE} ${dockerComposeCmd}"
