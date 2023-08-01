@@ -1,0 +1,94 @@
+#!/usr/bin/env groovy
+def gv
+
+pipeline {
+    agent any
+    tools {
+        maven 'Maven'
+    }
+    parameters {
+        booleanParam(name: 'executeTests', defaultValue: true, description: "should execute tests")
+    }
+    stages {
+        stage('increment application version') {
+            steps {
+                script {
+                    echo "incrementing application version ..."
+                    sh "mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit"
+                    def version = sh script: "mvn help:evaluate -f 'pom.xml' -Dexpression=project.version -q -DforceStdout", returnStdout: true trim()
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('init') {
+            steps {
+                script {
+                    gv = load "./jenkins-params-build/script.groovy"
+                }
+
+            }
+        }
+        stage('test') {
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
+            steps {
+                script {
+                    gv.testImage()
+                }
+            }
+        }
+        stage('build Docker Image') {
+            steps {
+                script {
+                    gv.buildImage()
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                script {
+                    env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')]                    
+                    gv.deployImage()
+                    echo "Deploying to ${ENV}"
+                }
+            }
+        }
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([gitUsernamePassword(credentialsId: 'connect-to-github', gitToolName: 'Default')]) {
+
+                    sh 'git config user.email "jenkins@example.com"'
+                    sh 'git config user.name "jenkins"'
+
+                    sh 'git status'
+                    sh 'git branch'
+                    sh 'git config --list'
+
+                    sh 'git add .'
+                    sh 'git commit -m "incremented the version and committed it back to repo"'
+                    sh 'git push origin HEAD:jenkins-ci'
+                    }
+                }
+            }
+        }
+        stage('deploy an application on EC2 instance') {
+            steps {
+                script {
+                    def REMOTE_INSTANCE = 'ec2-user@18.130.182.164'
+                    def REMOTE_DIR = '/home/ec2-user'
+                    def dockerComposeCmd = 'docker-compose -f docker-compose.yaml up --detach'
+                    sshagent(['ec2-server-key']) {
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ${REMOTE_INSTANCE}:${REMOTE_DIR}/"
+                        sh "ssh -o StrictHostKeyChecking=no ${REMOTE_INSTANCE} ${dockerComposeCmd}"
+                    }
+                }
+            }
+        }
+    }
+}
